@@ -30,20 +30,11 @@ public class TrainMixin {
     }
     
     @PlatformOnly("neoforge")
-    @Redirect(method = "collideWithOtherTrains", remap = false, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;explode", remap = false))
+    @Redirect(method = "collideWithOtherTrains", remap = false, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;explode(Lnet/minecraft/world/entity/Entity;DDDFLnet/minecraft/world/level/Level$ExplosionInteraction;)Lnet/minecraft/world/level/Explosion;", remap = false))
     private Explosion redirectTrainExplosionForge(Level level, Entity source, double x, double y, double z, float power, ExplosionInteraction interaction) {
-        CreateThreadedTrains.getServer().ifPresent(s -> s.execute(() -> {            
+        CreateThreadedTrains.getServer().ifPresent(s -> s.execute(() -> {
             level.explode(source, x, y, z, power, interaction);
         }));
         return null; // Not needed, because Create doesn't use the explosion result.
-    }  
-    
-    @PlatformOnly(PlatformOnly.FABRIC)
-    @Redirect(method = "collideWithOtherTrains", remap = false, at = @At(value = "INVOKE", target = "Lnet/minecraft/class_1937;method_8437", remap = false))
-    private Explosion redirectTrainExplosionFabric(Level level, Entity source, double x, double y, double z, float power, ExplosionInteraction interaction) {
-        CreateThreadedTrains.getServer().ifPresent(s -> s.execute(() -> {            
-            level.explode(source, x, y, z, power, interaction);
-        }));
-        return null; // Not needed, because Create doesn't use the explosion result.
-    }        
+    }
 }
