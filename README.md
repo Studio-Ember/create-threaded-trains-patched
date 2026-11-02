@@ -1,3 +1,11 @@
+# create-threaded-trains-patched
+
+Independent fork of [Create: Threaded Trains](https://github.com/MisterJulsen/Create-Threaded-Trains) by MrJulsen, aimed at making the threaded railway tick safe against deadlocks, race conditions and world corruption. The upstream history is preserved; this repository is developed separately and is not affiliated with the original author. Licensed under GPL-3.0-or-later like the original (see `LICENSE`).
+
+The text below is the original upstream README and does not yet reflect the changes in this fork.
+
+---
+
 A small mod that runs all calculations of the railway network on a **separate thread** parallel to the server tick, which greatly improves performance, especially in large networks.
 
 This mod is server-side only, but it can also be used on the client-side (if you are playing in singleplayer).
